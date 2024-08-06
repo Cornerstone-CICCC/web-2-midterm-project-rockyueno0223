@@ -1,9 +1,10 @@
 import React from 'react'
+import MediaItem from '../components/MediaItem'
 
 const Home = () => {
   return (
-    <div>
-      Home page
+    <div className='w-full flex justify-between'>
+      <MediaItem />
     </div>
   )
 }
