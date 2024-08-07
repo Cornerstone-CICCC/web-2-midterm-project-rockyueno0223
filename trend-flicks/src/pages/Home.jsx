@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
-import MediaItem from '../components/MediaItem'
+import MediaWrapper from '../components/MediaWrapper'
 
 const Home = () => {
-  const [movies, setMovies] = useState()
-  const [tvShows, setTvShows] = useState()
+  const [movies, setMovies] = useState([])
+  const [tvShows, setTvShows] = useState([])
 
   useEffect(() => {
     fetchTrendMovies()
@@ -59,8 +59,9 @@ const Home = () => {
   }
 
   return (
-    <div className='w-full flex justify-between'>
-      <MediaItem />
+    <div className='w-full flex flex-col'>
+      <MediaWrapper type={'Movies'} mediaData={movies} />
+      <MediaWrapper type={'TV Shows'} mediaData={tvShows} />
     </div>
   )
 }
