@@ -1,5 +1,10 @@
 import React, { useEffect } from 'react'
+import Rating from '@mui/material/Rating';
 import "../css/modal.css";
+
+const roundToTenth = (num) => {
+  return Math.round(num * 10) / 10;
+};
 
 const MediaItem = ({ isOpen, onClose, media }) => {
   useEffect(() => {
@@ -18,6 +23,8 @@ const MediaItem = ({ isOpen, onClose, media }) => {
   if (!isOpen) return null;
 
   const isMovie = media.media_type === "movie";
+
+  const roundedRating = roundToTenth(media.vote_average / 2);
 
   return (
     <div>
@@ -43,6 +50,7 @@ const MediaItem = ({ isOpen, onClose, media }) => {
           <p>{media.overview ? media.overview : "No text available"}</p>
           <div className='w-full flex justify-between px-4'>
             <span>
+              <Rating name="rating" value={roundedRating} precision={0.1} readOnly />
             </span>
             <span>
               Popularity: {Math.round(media.popularity)}
