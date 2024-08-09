@@ -11,7 +11,7 @@ function App() {
 
   const [movies, setMovies] = useState([])
   const [tvShows, setTvShows] = useState([])
-  const [searchInput, setSearchInput] = useState()
+  const [searchInput, setSearchInput] = useState(null)
 
   useEffect(() => {
     if (isDayMode) {
@@ -119,6 +119,9 @@ function App() {
           isDayMode={isDayMode}
           setIsDayMode={setIsDayMode}
           onSearch={fetchMediasWithKeywords}
+          fetchTrendMovies={fetchTrendMovies}
+          fetchTrendTvShows={fetchTrendTvShows}
+          setSearchInput={setSearchInput}
         />
         <Routes>
           <Route
