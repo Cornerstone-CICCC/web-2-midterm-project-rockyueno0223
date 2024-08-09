@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
 import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid';
+import SearchBar from './SearchBar';
 
 const Header = ({isDayMode, setIsDayMode}) => {
   const [isOpen, setIsOpen] = useState(false);
@@ -12,7 +13,11 @@ const Header = ({isDayMode, setIsDayMode}) => {
 
   const toggleDayNightMode = () => {
     setIsDayMode(!isDayMode);
-    // Implement your theme change logic here
+  };
+
+  const handleSearch = (query) => {
+    console.log('Search query:', query);
+    // You can perform your search action here with the processed query
   };
 
   return (
@@ -40,11 +45,7 @@ const Header = ({isDayMode, setIsDayMode}) => {
           </div>
           <div className="flex items-center space-x-4">
             <Link to="/about">About</Link>
-            <input
-              type="text"
-              placeholder="Search"
-              className="px-2 py-1 rounded bg-gray-700 text-white"
-            />
+            <SearchBar onSearch={handleSearch} fullWidth />
             <button
               onClick={toggleDayNightMode}
               className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none"
@@ -70,7 +71,7 @@ const Header = ({isDayMode, setIsDayMode}) => {
         leaveTo="-translate-x-full"
       >
         <div className="lg:hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-40">
-          <div className="relative w-64 bg-gray-800 h-full p-4">
+          <div className="relative w-80 bg-gray-800 h-full p-4">
             <button
               onClick={toggleMenu}
               className="absolute top-2 right-2 text-white focus:outline-none"
@@ -82,18 +83,14 @@ const Header = ({isDayMode, setIsDayMode}) => {
                 <Link to="/">Logo</Link>
               </span>
             </div>
-            <nav className="mt-8">
+            <nav className="mt-8 space-y-4">
               <div className="block py-2">
                 <Link to="/about">About</Link>
               </div>
-              <input
-                type="text"
-                placeholder="Search"
-                className="w-full px-2 py-1 rounded bg-gray-700 text-white my-4"
-              />
+              <SearchBar onSearch={handleSearch} />
               <button
                 onClick={toggleDayNightMode}
-                className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none w-full flex justify-center"
+                className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none w-full h-[38px] flex justify-center"
               >
                 {isDayMode ? (
                   <SunIcon className="w-6 h-6 text-yellow-400" />
