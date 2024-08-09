@@ -4,8 +4,7 @@ const SearchBar = ({ onSearch, fullWidth = false }) => {
   const [inputValue, setInputValue] = useState('');
 
   const handleSearch = () => {
-    const keywords = inputValue.trim().split(/\s+/).join('%20');
-    onSearch(keywords);
+    onSearch(inputValue.trim());
   };
 
   return (

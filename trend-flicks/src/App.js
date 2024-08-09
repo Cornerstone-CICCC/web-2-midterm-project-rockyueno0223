@@ -10,6 +10,7 @@ function App() {
 
   const [movies, setMovies] = useState([])
   const [tvShows, setTvShows] = useState([])
+  const [searchInput, setSearchInput] = useState()
 
   useEffect(() => {
     if (isDayMode) {
@@ -72,7 +73,8 @@ function App() {
     }
   }
 
-  const fetchMediasWithKeywords = async (query) => {
+  const fetchMediasWithKeywords = async (inputValue) => {
+    const query = inputValue.split(/\s+/).join('%20');
     const apiKey = process.env.REACT_APP_API_KEY;
     const options = {
       method: 'GET',
@@ -103,6 +105,7 @@ function App() {
 
       setMovies(movieArray)
       setTvShows(tvShowsArray)
+      setSearchInput(inputValue)
     } catch (error) {
       console.error('Failed to fetch media:', error);
     }
@@ -119,7 +122,7 @@ function App() {
         <Routes>
           <Route
             index
-            element={<Home movies={movies} tvShows={tvShows} />}
+            element={<Home movies={movies} tvShows={tvShows} searchInput={searchInput} />}
           />
           <Route path='/about' element={<About/>} />
         </Routes>
