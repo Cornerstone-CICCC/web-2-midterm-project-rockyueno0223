@@ -18,7 +18,7 @@ const SearchBar = ({ onSearch, fullWidth = false }) => {
       />
       <button
         onClick={handleSearch}
-        className="bg-blue-500 text-white px-4 py-1 rounded hover:bg-blue-600"
+        className="bg-gray-600 text-white px-4 py-1 rounded hover:bg-gray-500"
       >
         Search
       </button>

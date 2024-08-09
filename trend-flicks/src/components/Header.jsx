@@ -22,7 +22,7 @@ const Header = ({isDayMode, setIsDayMode, onSearch, fetchTrendMovies, fetchTrend
   };
 
   return (
-    <header className="bg-gray-800 text-white p-4">
+    <header className="bg-[#555555] text-white p-4">
       <div className="container mx-auto flex justify-between items-center">
         {/* Mobile: Hamburger & Logo */}
         <div className="flex items-center justify-between w-full lg:w-auto">
@@ -32,9 +32,9 @@ const Header = ({isDayMode, setIsDayMode, onSearch, fetchTrendMovies, fetchTrend
           >
             <Bars3Icon className="w-6 h-6" />
           </button>
-          <div className="lg:hidden text-center w-full">
+          <div className="lg:hidden w-full flex justify-center">
             <Link to="/" onClick={handleLinkClick}>
-              <span className="text-xl font-bold">Logo</span>
+              <img src="/logo.png" alt="Trend Flicks" className='block'/>
             </Link>
           </div>
         </div>
@@ -42,14 +42,16 @@ const Header = ({isDayMode, setIsDayMode, onSearch, fetchTrendMovies, fetchTrend
         {/* Desktop: Logo, Links, Search, Mode Button */}
         <div className="hidden lg:flex justify-between items-center w-full">
           <div className="text-xl font-bold">
-            <Link to="/" onClick={handleLinkClick}>Logo</Link>
+            <Link to="/" onClick={handleLinkClick}>
+            <img src="/logo.png" alt="Trend Flicks" className='block'/></Link>
           </div>
           <div className="flex items-center space-x-4">
-            <Link to="/about">About</Link>
+            <Link to="/about" className="text-white hover:text-gray-300">About</Link>
             <SearchBar onSearch={onSearch} fullWidth />
             <button
               onClick={toggleDayNightMode}
-              className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none"
+              className="p-2 rounded hover:bg-gray-600 focus:outline-none"
+              style={{ backgroundColor: isDayMode ? '#666666' : '#444444', color: isDayMode ? '#fff' : '#fff' }}
             >
               {isDayMode ? (
                 <SunIcon className="w-6 h-6 text-yellow-400" />
@@ -71,8 +73,8 @@ const Header = ({isDayMode, setIsDayMode, onSearch, fetchTrendMovies, fetchTrend
         leaveFrom="translate-x-0"
         leaveTo="-translate-x-full"
       >
-        <div className="lg:hidden fixed inset-0 bg-gray-900 bg-opacity-75 z-40">
-          <div className="relative w-80 bg-gray-800 h-full p-4">
+        <div className="lg:hidden fixed inset-0 bg-[#444444] bg-opacity-75 z-40">
+          <div className="relative w-80 bg-[#555555] h-full p-4">
             <button
               onClick={toggleMenu}
               className="absolute top-2 right-2 text-white focus:outline-none"
@@ -86,12 +88,13 @@ const Header = ({isDayMode, setIsDayMode, onSearch, fetchTrendMovies, fetchTrend
             </div>
             <nav className="mt-8 space-y-4">
               <div className="block py-2">
-                <Link to="/about">About</Link>
+                <Link to="/about" className="text-white hover:text-gray-300">About</Link>
               </div>
               <SearchBar onSearch={onSearch} />
               <button
                 onClick={toggleDayNightMode}
-                className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none w-full h-[38px] flex justify-center"
+                className="p-2 rounded hover:bg-gray-500 focus:outline-none w-full h-[38px] flex justify-center"
+                style={{ backgroundColor: isDayMode ? '#666666' : '#444444', color: isDayMode ? '#fff' : '#fff' }}
               >
                 {isDayMode ? (
                   <SunIcon className="w-6 h-6 text-yellow-400" />

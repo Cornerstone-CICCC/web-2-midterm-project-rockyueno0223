@@ -112,8 +112,11 @@ function App() {
     }
   };
 
+  const backgroundColor = isDayMode ? '#f0f0f0' : '#333333';
+  const textColor = isDayMode ? '#333333' : '#f0f0f0';
+
   return (
-    <div className={`App ${isDayMode ? 'bg-white' : 'bg-gray-900'} min-h-screen text-gray-900 dark:text-white`}>
+    <div style={{ backgroundColor, color: textColor }} className='App min-h-screen'>
       <BrowserRouter>
         <Header
           isDayMode={isDayMode}
