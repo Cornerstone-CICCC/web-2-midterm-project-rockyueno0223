@@ -3,9 +3,8 @@ import { Link } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
 import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid';
 
-const Header = () => {
+const Header = ({isDayMode, setIsDayMode}) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [isDayMode, setIsDayMode] = useState(true);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
