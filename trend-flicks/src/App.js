@@ -8,6 +8,9 @@ import Header from './components/Header'
 function App() {
   const [isDayMode, setIsDayMode] = useState(true);
 
+  const [movies, setMovies] = useState([])
+  const [tvShows, setTvShows] = useState([])
+
   useEffect(() => {
     if (isDayMode) {
       document.documentElement.classList.remove('dark');
@@ -16,12 +19,108 @@ function App() {
     }
   }, [isDayMode]);
 
+  useEffect(() => {
+    fetchTrendMovies()
+    fetchTrendTvShows()
+  }, [])
+
+  const fetchTrendMovies = async () => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`
+      }
+    };
+
+    try {
+      const response = await fetch('https://api.themoviedb.org/3/trending/movie/day?language=en-US', options);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setMovies(data.results)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchTrendTvShows = async () => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`
+      }
+    };
+
+    try {
+      const response = await fetch('https://api.themoviedb.org/3/trending/tv/day?language=en-US', options)
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      setTvShows(data.results)
+    } catch (error) {
+      console.error(error);
+    }
+  }
+
+  const fetchMediasWithKeywords = async (query) => {
+    const apiKey = process.env.REACT_APP_API_KEY;
+    const options = {
+      method: 'GET',
+      headers: {
+        accept: 'application/json',
+        Authorization: `Bearer ${apiKey}`,
+      },
+    };
+
+    try {
+      const response = await fetch(`https://api.themoviedb.org/3/search/multi?query=${query}&include_adult=false&language=en-US&page=1`, options);
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! Status: ${response.status}`);
+      }
+
+      const data = await response.json();
+
+      const movieArray = [];
+      const tvShowsArray = [];
+      data.results.forEach((media) => {
+        if (media.media_type === 'movie') {
+          movieArray.push(media);
+        } else if (media.media_type === 'tv') {
+          tvShowsArray.push(media);
+        }
+      });
+
+      setMovies(movieArray)
+      setTvShows(tvShowsArray)
+    } catch (error) {
+      console.error('Failed to fetch media:', error);
+    }
+  };
+
   return (
     <div className={`App ${isDayMode ? 'bg-white' : 'bg-gray-900'} min-h-screen text-gray-900 dark:text-white`}>
       <BrowserRouter>
-        <Header isDayMode={isDayMode} setIsDayMode={setIsDayMode} />
+        <Header
+          isDayMode={isDayMode}
+          setIsDayMode={setIsDayMode}
+          onSearch={fetchMediasWithKeywords}
+        />
         <Routes>
-          <Route index element={<Home/>} />
+          <Route
+            index
+            element={<Home movies={movies} tvShows={tvShows} />}
+          />
           <Route path='/about' element={<About/>} />
         </Routes>
       </BrowserRouter>

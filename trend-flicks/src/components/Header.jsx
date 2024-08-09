@@ -4,7 +4,7 @@ import { Transition } from '@headlessui/react';
 import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid';
 import SearchBar from './SearchBar';
 
-const Header = ({isDayMode, setIsDayMode}) => {
+const Header = ({isDayMode, setIsDayMode, onSearch}) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,11 +13,6 @@ const Header = ({isDayMode, setIsDayMode}) => {
 
   const toggleDayNightMode = () => {
     setIsDayMode(!isDayMode);
-  };
-
-  const handleSearch = (query) => {
-    console.log('Search query:', query);
-    // You can perform your search action here with the processed query
   };
 
   return (
@@ -45,7 +40,7 @@ const Header = ({isDayMode, setIsDayMode}) => {
           </div>
           <div className="flex items-center space-x-4">
             <Link to="/about">About</Link>
-            <SearchBar onSearch={handleSearch} fullWidth />
+            <SearchBar onSearch={onSearch} fullWidth />
             <button
               onClick={toggleDayNightMode}
               className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none"
@@ -87,7 +82,7 @@ const Header = ({isDayMode, setIsDayMode}) => {
               <div className="block py-2">
                 <Link to="/about">About</Link>
               </div>
-              <SearchBar onSearch={handleSearch} />
+              <SearchBar onSearch={onSearch} />
               <button
                 onClick={toggleDayNightMode}
                 className="bg-gray-700 p-2 rounded hover:bg-gray-600 focus:outline-none w-full h-[38px] flex justify-center"
