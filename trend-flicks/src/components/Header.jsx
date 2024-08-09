@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { Transition } from '@headlessui/react';
 import { SunIcon, MoonIcon, XMarkIcon, Bars3Icon } from '@heroicons/react/24/solid';
 import SearchBar from './SearchBar';
 
 const Header = ({isDayMode, setIsDayMode, onSearch}) => {
+  const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
@@ -13,6 +14,11 @@ const Header = ({isDayMode, setIsDayMode, onSearch}) => {
 
   const toggleDayNightMode = () => {
     setIsDayMode(!isDayMode);
+  };
+
+  const handleLinkClick = (url) => {
+    navigate(url);
+    window.location.reload(); // Trigger component remount by reloading
   };
 
   return (
@@ -27,7 +33,7 @@ const Header = ({isDayMode, setIsDayMode, onSearch}) => {
             <Bars3Icon className="w-6 h-6" />
           </button>
           <div className="lg:hidden text-center w-full">
-            <Link to="/">
+            <Link to="/" onClick={() => handleLinkClick('/')}>
               <span className="text-xl font-bold">Logo</span>
             </Link>
           </div>
@@ -36,7 +42,7 @@ const Header = ({isDayMode, setIsDayMode, onSearch}) => {
         {/* Desktop: Logo, Links, Search, Mode Button */}
         <div className="hidden lg:flex justify-between items-center w-full">
           <div className="text-xl font-bold">
-            <Link to="/">Logo</Link>
+            <Link to="/" onClick={() => handleLinkClick('/')}>Logo</Link>
           </div>
           <div className="flex items-center space-x-4">
             <Link to="/about">About</Link>
@@ -75,7 +81,7 @@ const Header = ({isDayMode, setIsDayMode, onSearch}) => {
             </button>
             <div className="flex justify-center mt-4">
               <span className="text-xl font-bold">
-                <Link to="/">Logo</Link>
+                <Link to="/" onClick={() => handleLinkClick('/')}>Logo</Link>
               </span>
             </div>
             <nav className="mt-8 space-y-4">
