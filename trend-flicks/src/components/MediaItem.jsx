@@ -41,7 +41,7 @@ const MediaItem = ({ isOpen, onClose, media }) => {
             alt={media.media_type === 'movie' ? media.title : media.name}
             className='w-full h-auto'
           />
-          <h2 className="text-xl font-bold mt-4 mb-2">
+          <h2 className="text-xl text-black font-bold font-serif mt-4 mb-2">
             {isMovie ? media.title : media.name}
           </h2>
           <div className='w-full flex justify-between px-6 text-gray-600'>
@@ -52,7 +52,7 @@ const MediaItem = ({ isOpen, onClose, media }) => {
               {media.media_type}
             </span>
           </div>
-          <p className='text-left mt-2 mb-3 px-4'>{media.overview ? media.overview : "No text available"}</p>
+          <p className='text-black text-left mt-2 mb-3 px-4'>{media.overview ? media.overview : "No text available"}</p>
           <div className='w-full flex justify-between px-6 text-gray-600'>
             <span>
               <Rating name="rating" value={roundedRating} precision={0.1} readOnly />
