@@ -11,7 +11,7 @@ const MediaThumbnail = ({ media }) => {
       <img
         src={`https://image.tmdb.org/t/p/w500${media.poster_path}`}
         alt={media.media_type === 'movie' ? media.title : media.name}
-        className='w-full h-auto rounded-md cursor-pointer'
+        className='w-full h-auto rounded-md cursor-pointer hover:opacity-70'
         onClick={openModal}
       />
       <MediaItem isOpen={isModalOpen} onClose={closeModal} media={media} />

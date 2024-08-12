@@ -22,7 +22,7 @@ const Header = ({isDayMode, setIsDayMode, onSearch, fetchTrendMovies, fetchTrend
   };
 
   return (
-    <header className="bg-[#555555] text-white p-4">
+    <header className="w-full bg-[#555555] text-white px-4 py-3 fixed top-0 left-0 z-10">
       <div className="container mx-auto flex justify-between items-center">
         {/* Mobile: Hamburger & Logo */}
         <div className="flex items-center justify-between w-full lg:w-auto">
